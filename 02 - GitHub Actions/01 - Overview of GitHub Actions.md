@@ -71,5 +71,5 @@ my-java-app/
            └── ci-cd.yml
 ```
 
-```ci-cd.yml``` file ander tumko yaml sintax likhna hota hai.
+```ci-cd.yml``` file ander tumko pipeline ka yaml syntax likhna hota hai.
 
