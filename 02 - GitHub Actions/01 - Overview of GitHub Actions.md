@@ -62,6 +62,10 @@ GitHub repository mein ye folder create karo:
 ```
 
 Is folder ke ander tumhari yaml pipeline create hoti hai.
+```
+.github/workflows/ci-cd.yml
+```
+yahi yaml pipeline hai. Iska naam tum kuch bhi rakh sakte ho.
 
 Structure:
 ```
