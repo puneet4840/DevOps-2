@@ -420,13 +420,28 @@ jobs:
           npm install
           npm test # Apni khud ki terminal commands
 ```
+- Step 1 jab tak khatam nahi hoga, Step 2 shuru nahi hoga.
+- Agar Step 2 fail ho gaya, to Step 3 nahi chalega (jab tak aap alag se setting na karein).
+- Saare steps ek hi server par hain, isliye agar Step 1 koi file banata hai, to Step 2 use padh sakta hai.
 
+```with```:
 ```
 with:
  node-version: '20'
 ```
 with ka use action ko input dene ke liye hota hai. Jaise uper example mein step 2 ko node js ka version chaiye isliye with ke through node ka version diya gya hai.
 
-- Step 1 jab tak khatam nahi hoga, Step 2 shuru nahi hoga.
-- Agar Step 2 fail ho gaya, to Step 3 nahi chalega (jab tak aap alag se setting na karein).
-- Saare steps ek hi server par hain, isliye agar Step 1 koi file banata hai, to Step 2 use padh sakta hai.
+
+```needs```:
+Ye job dependency define karne ke liye use hota hai. 
+
+```
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+  test:
+    needs: build
+```
+Jaise jab build job successfully finish ho jayegi tab hi test job chalegi.
+
