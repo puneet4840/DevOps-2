@@ -132,6 +132,7 @@ Ye sirf identification ke liye hota hai. Agar multiple workflows hain toh easily
 
 <br>
 <br>
+<br>
 
 **2. on**:
 
@@ -230,6 +231,7 @@ on:
 ```
 Ek hi workflow multiple events pe trigger ho sakta hai.
 
+<br>
 <br>
 <br>
 
@@ -338,3 +340,93 @@ jobs:
 
 Chahe aap same runner (ubuntu-latest) likhein ya alag, har job ka server bilkul alag hota hai. Jo file aapne lint-code job mein banayi hai, woh test-code job ko nahi milegi, jab tak aap use Artifacts ke zariye share na karein.
 
+<br>
+<br>
+<br>
+
+**4. steps**:
+
+Steps job ke ander chote-chote tasks hote hain, Jaise:
+- Git checkout.
+- Java install.
+- Maven build.
+- Docker build.
+- Deploy.
+
+Example:
+```
+steps:
+ - name: Checkout Code
+   uses: actions/checkout@v4
+
+ - name: Print Message
+   run: echo "Hello DevOps"
+```
+
+Steps Ke 2 Sabse Zaroori Type:
+- ```run``` (Commands chalane ke liye): Shell commands runner par run karne ke liye (jaise npm install, python main.py, ya mkdir folder).
+
+Example:
+```
+Single command run karna:
+
+run: mvn clean install
+```
+
+```
+Multiple shell command run karna:
+
+run: |
+  pwd
+  ls -la
+  mvn test
+```
+
+- ```uses``` (Ready-made Actions use karne ke liye): GitHub Marketplace se pehle se bane-banaye code blocks ko use karne ke liye.
+
+Example:
+```
+uses: actions/checkout@v4
+```
+Ye action Repository ka code runner machine mein clone karta hai. Agar checkout nahi karoge to code available nahi hoga.
+
+Common Actions:
+| Action              | Purpose        |
+| ------------------- | -------------- |
+| actions/checkout    | Code clone     |
+| actions/setup-java  | Java install   |
+| actions/setup-node  | NodeJS install |
+| docker/login-action | Docker login   |
+
+
+Example of both steps:
+```
+jobs:
+  setup-and-run:
+    runs-on: ubuntu-latest
+    
+    steps: # 👈 Yahan se steps shuru hote hain
+    
+      - name: Step 1: Code Copy Karo
+        uses: actions/checkout@v4 # Pehle se bana Action hai jo aapka code runner par lata hai
+
+      - name: Step 2: Node.js Install Karo
+        uses: actions/setup-node@v4 # Ready-made action software install karne ke liye
+        with:
+          node-version: '20'
+
+      - name: Step 3: Test Command Chalao
+        run: |
+          npm install
+          npm test # Apni khud ki terminal commands
+```
+
+```
+with:
+ node-version: '20'
+```
+with ka use action ko input dene ke liye hota hai. Jaise uper example mein step 2 ko node js ka version chaiye isliye with ke through node ka version diya gya hai.
+
+- Step 1 jab tak khatam nahi hoga, Step 2 shuru nahi hoga.
+- Agar Step 2 fail ho gaya, to Step 3 nahi chalega (jab tak aap alag se setting na karein).
+- Saare steps ek hi server par hain, isliye agar Step 1 koi file banata hai, to Step 2 use padh sakta hai.
