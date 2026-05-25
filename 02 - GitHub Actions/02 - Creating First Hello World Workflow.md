@@ -2,6 +2,8 @@
 
 Is slide mein hum Hello World workflow create karenge.
 
+Niche diye hue path par ```hello_world.yaml``` file create karlo. Aur yaml code likho.
+
 ```
 .github/workflow/hello_world.yaml
 ```
