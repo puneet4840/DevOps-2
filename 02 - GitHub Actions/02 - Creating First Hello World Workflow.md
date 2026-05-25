@@ -76,3 +76,43 @@ Ye multiple steps tumhari hello_world job ke ander run ho rahe hain.
 Step ```- name: Code Checkout``` runner par repo ka code clone karta hai.
 
 Step ```-name: Printing Hello World``` Hello World print kar raha hai.
+
+
+<br>
+<br>
+
+## Multiple Jobs in a workflow
+
+Hum multiple jobs bhi run kar sakte hain. Second job mein runner ka hostname print karwa rahe hain.
+
+```hello_world.yaml```:
+```
+name: Hello World with multiple jobs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Printing Hello World
+        run: echo "Hello World"
+
+  hostname:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Printing runner name
+        run: echo $HOSTNAME
+```
+
+Output:
+```
+Hello World
+runnervmg397c
+```
